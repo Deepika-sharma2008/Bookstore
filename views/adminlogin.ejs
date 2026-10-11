@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookora</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-amber-50 text-stone-800 min-h-screen flex flex-col">
+
+    <%- include('includes/nav.ejs') %>
+
+    <!-- Login Section -->
+    <main class="flex-grow flex items-center justify-center px-5 py-12">
+
+        <div class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-amber-100 overflow-hidden">
+
+            <!-- Header -->
+            <div class="bg-stone-900 text-center px-8 py-8">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-700 flex items-center justify-center text-3xl">
+                    🔐
+                </div>
+
+                <h1 class="text-3xl font-bold text-amber-400">
+                    Admin Login
+                </h1>
+
+                <p class="text-stone-300 mt-2">
+                    Welcome back to Bookora
+                </p>
+            </div>
+
+            <!-- Form -->
+            <div class="p-8">
+
+                <p class="text-stone-500 text-center mb-7">
+                    Login to manage your bookstore
+                </p>
+
+                <form action="/admin/login" method="POST">
+
+                    <!-- Username -->
+                    <div class="mb-5">
+                        <label for="username" class="block font-semibold mb-2 text-stone-800">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username"
+                            required
+                            autocomplete="username"
+                            class="w-full border border-stone-300 rounded-xl px-4 py-3 outline-none focus:border-amber-700 focus:ring-2 focus:ring-amber-200 transition"
+                        >
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-6">
+                        <label for="password" class="block font-semibold mb-2 text-stone-800">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                            autocomplete="current-password"
+                            class="w-full border border-stone-300 rounded-xl px-4 py-3 outline-none focus:border-amber-700 focus:ring-2 focus:ring-amber-200 transition"
+                        >
+                    </div>
+
+                    <!-- Login Button -->
+                    <button
+                        type="submit"
+                        class="w-full bg-amber-700 hover:bg-stone-900 text-white font-semibold py-3 rounded-xl shadow-md hover:shadow-lg transition duration-300"
+                    >
+                        Login to Dashboard →
+                    </button>
+
+                </form>
+
+                <!-- Back to Books -->
+                <a
+                    href="/books"
+                    class="block text-center text-amber-800 font-semibold mt-6 hover:text-stone-900 transition"
+                >
+                    ← Back to Books
+                </a>
+
+                <div class="border-t border-stone-200 mt-7 pt-5 text-center">
+                    <p class="text-sm text-stone-500">
+                         Bookora
+                    </p>
+                    <p class="text-xs text-stone-400 mt-1">
+                        Your trusted place for every book lover.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>

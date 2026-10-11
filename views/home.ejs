@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookora</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-amber-50 text-stone-800">
+
+    <!-- Navbar -->
+    <%- include('includes/nav') %>
+
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+            <!-- Left Content -->
+            <div>
+                <p class="text-amber-800 font-semibold mb-3">
+                    WELCOME TO Bookora
+                </p>
+
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
+                    Discover Your Next
+                    <span class="text-amber-800">Favourite Book</span>
+                </h1>
+
+                <p class="text-stone-600 text-lg leading-8 mb-6">
+                    Books open the door to new ideas, knowledge and imagination.
+                    Explore our collection of amazing books and find the perfect
+                    story for your next reading adventure.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="/books"
+                       class="bg-stone-900 text-white px-6 py-3 rounded-lg hover:bg-stone-700">
+                        Explore Books →
+                    </a>
+
+                    <a href="/about"
+                       class="border border-stone-800 px-6 py-3 rounded-lg hover:bg-stone-200">
+                        About Us
+                    </a>
+                </div>
+
+                <div class="flex gap-8 mt-8">
+                    <div>
+                        <h3 class="text-2xl font-bold">Read</h3>
+                        <p class="text-sm text-stone-500">Learn something new</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-bold">Grow</h3>
+                        <p class="text-sm text-stone-500">Every single day</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Image -->
+            <div>
+                <img
+                    src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=900&q=80"
+                    alt="Books arranged in a beautiful library"
+                    class="w-full h-80 md:h-96 object-cover rounded-2xl shadow-lg"
+                >
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Bottom Section -->
+    <section class="bg-white py-10 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-3">
+                A World of Books Awaits You
+            </h2>
+
+            <p class="text-stone-600 mb-6">
+                From exciting stories to useful learning guides,
+                find books that inspire you.
+            </p>
+
+            <a href="/books"
+               class="inline-block bg-amber-800 text-white px-6 py-3 rounded-lg hover:bg-amber-900">
+                Browse All Books
+            </a>
+        </div>
+    </section>
+
+<!-- Popular Books Section -->
+<section class="max-w-6xl mx-auto px-6 py-16">
+
+    <div class="flex justify-between items-center mb-8">
+        <div>
+            <p class="text-amber-800 font-semibold mb-2">
+                OUR COLLECTION
+            </p>
+            <h2 class="text-3xl font-bold">
+                Popular Books
+            </h2>
+        </div>
+
+        <a href="/books"
+           class="text-amber-800 font-semibold hover:underline">
+            View All →
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+
+        <!-- Book 1 -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition">
+            <img
+                src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80"
+                alt="Book collection"
+                class="w-full h-56 object-cover"
+            >
+
+            <div class="p-5">
+                <p class="text-sm text-amber-800 mb-2">FICTION</p>
+                <h3 class="text-xl font-bold mb-2">
+                    Stories & Adventures
+                </h3>
+                <p class="text-stone-600 mb-4">
+                    Discover wonderful stories that take you
+                    into a world of imagination.
+                </p>
+                <a href="/books"
+                   class="inline-block bg-stone-900 text-white px-4 py-2 rounded-lg hover:bg-stone-700">
+                    Explore Books
+                </a>
+            </div>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition">
+            <img
+                src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=600&q=80"
+                alt="Books for learning"
+                class="w-full h-56 object-cover"
+            >
+
+            <div class="p-5">
+                <p class="text-sm text-amber-800 mb-2">SELF LEARNING</p>
+                <h3 class="text-xl font-bold mb-2">
+                    Learn Something New
+                </h3>
+                <p class="text-stone-600 mb-4">
+                    Improve your knowledge, build new skills
+                    and keep growing every day.
+                </p>
+                <a href="/category/SelfLearning"
+                   class="inline-block bg-stone-900 text-white px-4 py-2 rounded-lg hover:bg-stone-700">
+                    Explore Books
+                </a>
+            </div>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition">
+            <img
+                src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80"
+                alt="Books for readers"
+                class="w-full h-56 object-cover"
+            >
+
+            <div class="p-5">
+                <p class="text-sm text-amber-800 mb-2">FANTASY</p>
+                <h3 class="text-xl font-bold mb-2">
+                    A World of Imagination
+                </h3>
+                <p class="text-stone-600 mb-4">
+                    Enjoy magical worlds, exciting journeys
+                    and unforgettable characters.
+                </p>
+                <a href="/category/Fantasy"
+                   class="inline-block bg-stone-900 text-white px-4 py-2 rounded-lg hover:bg-stone-700">
+                    Explore Books
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Why Choose Us Section -->
+<section class="bg-white py-16 px-6">
+
+    <div class="max-w-6xl mx-auto">
+
+        <div class="text-center mb-10">
+            <p class="text-amber-800 font-semibold mb-2">
+                WHY READ ME?
+            </p>
+
+            <h2 class="text-3xl font-bold mb-3">
+                Your Perfect Reading Partner
+            </h2>
+
+            <p class="text-stone-600 max-w-2xl mx-auto">
+                We make discovering your next favourite book
+                simple, enjoyable and inspiring.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+
+            <div class="text-center p-6 rounded-xl bg-amber-50">
+                <div class="text-4xl mb-4">📚</div>
+                <h3 class="text-xl font-bold mb-3">
+                    Wide Collection
+                </h3>
+                <p class="text-stone-600">
+                    Explore different genres and find books
+                    that match your interests.
+                </p>
+            </div>
+
+            <div class="text-center p-6 rounded-xl bg-amber-50">
+                <div class="text-4xl mb-4">🔎</div>
+                <h3 class="text-xl font-bold mb-3">
+                    Easy to Explore
+                </h3>
+                <p class="text-stone-600">
+                    Browse books and discover interesting
+                    reads in just a few clicks.
+                </p>
+            </div>
+
+            <div class="text-center p-6 rounded-xl bg-amber-50">
+                <div class="text-4xl mb-4">💡</div>
+                <h3 class="text-xl font-bold mb-3">
+                    Learn & Grow
+                </h3>
+                <p class="text-stone-600">
+                    Find inspiration, gain knowledge and
+                    make reading a daily habit.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
+    <!-- Footer -->
+    <%- include('includes/footer') %>
+
+</body>
+</html>

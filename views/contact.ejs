@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookora</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-amber-50 text-stone-800">
+
+    <!-- Navbar -->
+    <%- include('includes/nav.ejs') %>
+
+
+    <!-- Hero Section -->
+    <section class="bg-stone-900 text-white">
+        <div class="max-w-7xl mx-auto px-6 py-16 text-center">
+
+            <p class="uppercase tracking-widest text-amber-300 font-semibold">
+                Get In Touch
+            </p>
+
+            <h1 class="text-4xl md:text-5xl font-bold mt-4">
+                Contact <span class="text-amber-400">Us</span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto mt-5 text-stone-300 leading-7">
+                Have a question about a book or need some help?
+                We are always happy to hear from our readers.
+                Send us a message and we will get back to you.
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+            <!-- Left Side -->
+            <div>
+
+                <p class="text-amber-800 font-semibold">
+                    CONTACT INFORMATION
+                </p>
+
+                <h2 class="text-3xl md:text-4xl font-bold mt-3">
+                    We'd Love to Hear From You
+                </h2>
+
+                <p class="text-stone-600 mt-5 leading-7">
+                    At Bookora, we believe every reader
+                    deserves a great experience. Contact us for
+                    questions, suggestions, feedback or book-related
+                    enquiries.
+                </p>
+
+
+                <!-- Contact Cards -->
+                <div class="space-y-5 mt-8">
+
+                    <!-- Email -->
+                    <div class="flex items-center gap-5 bg-white p-5 rounded-2xl shadow-sm">
+
+                        <div class="w-14 h-14 shrink-0 rounded-xl bg-amber-100
+                                    flex items-center justify-center text-2xl">
+                            📧
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-lg">Email Us</h3>
+                            <p class="text-stone-500 mt-1">
+                                support@bookora.com
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Phone -->
+                    <div class="flex items-center gap-5 bg-white p-5 rounded-2xl shadow-sm">
+
+                        <div class="w-14 h-14 shrink-0 rounded-xl bg-amber-100
+                                    flex items-center justify-center text-2xl">
+                            📱
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-lg">Call Us</h3>
+                            <p class="text-stone-500 mt-1">
+                                Contact us for assistance
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Location -->
+                    <div class="flex items-center gap-5 bg-white p-5 rounded-2xl shadow-sm">
+
+                        <div class="w-14 h-14 shrink-0 rounded-xl bg-amber-100
+                                    flex items-center justify-center text-2xl">
+                            📍
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-lg">Our Location</h3>
+                            <p class="text-stone-500 mt-1">
+                                India
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Extra Message -->
+                <div class="mt-8 border-l-4 border-amber-700 pl-5 py-2">
+                    <h3 class="font-bold text-lg">
+                        Every Reader Matters!
+                    </h3>
+
+                    <p class="text-stone-600 mt-2 leading-7">
+                        Your feedback helps us improve our collection
+                        and provide a better reading experience.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Right Side: Contact Form -->
+            <div class="bg-white rounded-3xl shadow-md border border-amber-100
+                        p-6 md:p-10">
+
+                <h2 class="text-2xl font-bold mb-2">
+                    Send Us a Message
+                </h2>
+
+                <p class="text-stone-500 mb-7">
+                    Fill in the details below and share your message.
+                </p>
+
+
+                <form action="/contact" method="POST">
+
+                    <!-- Name -->
+                    <div class="mb-5">
+                        <label for="name" class="block font-semibold mb-2">
+                            Your Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your full name"
+                            required
+                            class="w-full border border-stone-200 rounded-xl
+                                   px-4 py-3 outline-none
+                                   focus:border-amber-700 focus:ring-2
+                                   focus:ring-amber-100">
+                    </div>
+
+
+                    <!-- Email -->
+                    <div class="mb-5">
+                        <label for="email" class="block font-semibold mb-2">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            required
+                            class="w-full border border-stone-200 rounded-xl
+                                   px-4 py-3 outline-none
+                                   focus:border-amber-700 focus:ring-2
+                                   focus:ring-amber-100">
+                    </div>
+
+
+                    <!-- Mobile -->
+                    <div class="mb-5">
+                        <label for="mob" class="block font-semibold mb-2">
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="mob"
+                            name="mob"
+                            placeholder="Enter your mobile number"
+                            required
+                            class="w-full border border-stone-200 rounded-xl
+                                   px-4 py-3 outline-none
+                                   focus:border-amber-700 focus:ring-2
+                                   focus:ring-amber-100">
+                    </div>
+
+
+                    <!-- Message -->
+                    <div class="mb-6">
+                        <label for="message" class="block font-semibold mb-2">
+                            Your Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="5"
+                            placeholder="Write your message here..."
+                            required
+                            class="w-full border border-stone-200 rounded-xl
+                                   px-4 py-3 outline-none resize-none
+                                   focus:border-amber-700 focus:ring-2
+                                   focus:ring-amber-100"></textarea>
+                    </div>
+
+
+                    <!-- Submit Button -->
+                    <button
+                        type="submit"
+                        class="w-full bg-stone-900 text-white font-bold
+                               py-3.5 rounded-xl hover:bg-amber-800
+                               transition duration-300">
+                        Send Message →
+                    </button>
+
+                    <p class="text-stone-400 text-sm text-center mt-4">
+                        Thank you for connecting with Bookora.
+                    </p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>

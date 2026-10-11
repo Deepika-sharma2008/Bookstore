@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart | Read Me Book Store</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-amber-50 text-stone-800 min-h-screen flex flex-col">
+
+    <%- include('includes/nav.ejs') %>
+
+        <!-- Main Section -->
+        <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-10">
+
+            <!-- Page Heading -->
+            <div class="mb-8">
+                <span
+                    class="inline-block bg-amber-100 text-amber-900 px-4 py-2 rounded-full text-sm font-semibold mb-3">
+                    YOUR COLLECTION
+                </span>
+
+                <h1 class="text-3xl md:text-4xl font-bold text-stone-900">
+                    🛒 My Shopping Cart
+                </h1>
+
+                <p class="text-stone-500 mt-3">
+                    Review your selected books before checkout.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Cart Items -->
+                <div class="lg:col-span-2">
+                    <div id="cartItems" class="space-y-5">
+                        <div class="bg-white rounded-2xl border border-amber-100 p-6 text-stone-500">
+                            Loading cart...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="bg-white rounded-2xl shadow-lg border border-amber-100 p-6 h-fit lg:sticky lg:top-6">
+
+                    <h2 class="text-xl font-bold text-stone-900 mb-5">
+                        Order Summary
+                    </h2>
+
+                    <div class="flex justify-between mb-4 text-stone-600">
+                        <span>Items</span>
+                        <span id="itemCount" class="font-semibold">0</span>
+                    </div>
+
+                    <div class="flex justify-between mb-4 text-stone-600">
+                        <span>Delivery</span>
+                        <span class="text-amber-800 font-semibold">Free</span>
+                    </div>
+
+                    <div class="flex justify-between mb-4 text-stone-600">
+                        <span>Subtotal</span>
+                        <span>₹<span id="subtotal">0</span></span>
+                    </div>
+
+                    <hr class="border-stone-200 my-5">
+
+                    <div class="flex justify-between text-xl font-bold">
+                        <span>Total</span>
+                        <span class="text-amber-800">₹<span id="grandTotal">0</span></span>
+                    </div>
+
+                    <button type="button" onclick="checkout()"
+                        class="w-full mt-6 bg-amber-700 hover:bg-stone-900 text-white py-3 rounded-xl font-semibold shadow-md transition duration-300">
+                        Proceed to Checkout →
+                    </button>
+
+                    <a href="/books"
+                        class="block text-center mt-4 text-amber-800 hover:text-stone-900 font-semibold transition">
+                        ← Continue Shopping
+                    </a>
+
+                    <div class="mt-6 pt-5 border-t border-stone-200 text-center">
+                        <p class="text-sm text-stone-500">
+                            📚 Happy Reading!
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+
+        <%- include('includes/footer.ejs') %>
+
+            <script>
+                let booksInCart = [];
+
+                function getCartIds() {
+                    try {
+                        const ids = JSON.parse(localStorage.getItem('bookCart') || '[]');
+                        return Array.isArray(ids) ? ids : [];
+                    } catch (error) {
+                        return [];
+                    }
+                }
+
+                function saveCartIds(ids) {
+                    localStorage.setItem('bookCart', JSON.stringify(ids));
+                }
+
+                async function loadCart() {
+                    const ids = getCartIds();
+                    const container = document.getElementById('cartItems');
+
+                    if (ids.length === 0) {
+                        showEmptyCart();
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch('/cart/details', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ ids })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Could not load cart');
+                        }
+
+                        const books = await response.json();
+
+                        // Preserve the order of books in the cart
+                        booksInCart = ids
+                            .map(id => books.find(book => String(book._id) === String(id)))
+                            .filter(Boolean);
+
+                        // Remove IDs for books that no longer exist
+                        saveCartIds(booksInCart.map(book => book._id));
+
+                        renderCart();
+
+                    } catch (error) {
+                        container.innerHTML = `
+                    <div class="bg-white p-6 rounded-2xl border border-amber-100 text-red-700">
+                        Unable to load your cart. Please refresh the page.
+                    </div>`;
+                    }
+                }
+
+                function renderCart() {
+                    const container = document.getElementById('cartItems');
+
+                    if (booksInCart.length === 0) {
+                        showEmptyCart();
+                        return;
+                    }
+
+                    container.innerHTML = booksInCart.map(book => `
+                <div class="bg-white rounded-2xl border border-amber-100 shadow-sm p-4 sm:p-5 flex flex-col sm:flex-row gap-5 hover:shadow-md transition">
+
+                    <img
+                        src="${escapeHTML(book.image || '')}"
+                        alt="${escapeHTML(book.title)}"
+                        onerror="this.onerror=null;this.src='https://placehold.co/140x180?text=Book';"
+                        class="w-28 h-36 object-contain bg-amber-50 rounded-xl mx-auto sm:mx-0 border border-amber-100">
+
+                    <div class="flex-1 flex flex-col items-center sm:items-start">
+
+                        <h3 class="text-lg font-bold text-stone-900 text-center sm:text-left">
+                            ${escapeHTML(book.title)}
+                        </h3>
+
+                        <p class="text-stone-500 mt-1">
+                            By ${escapeHTML(book.authorName || 'Unknown Author')}
+                        </p>
+
+                        <p class="text-amber-800 text-xl font-bold mt-4">
+                            ₹${(Number(book.price) || 0).toLocaleString('en-IN')}
+                        </p>
+
+                        <button
+                            type="button"
+                            onclick="removeBook('${escapeHTML(book._id)}')"
+                            class="mt-4 text-red-600 hover:text-red-800 font-semibold transition">
+                             Remove
+                        </button>
+
+                    </div>
+                </div>
+            `).join('');
+
+                    const total = booksInCart.reduce(
+                        (sum, book) => sum + (Number(book.price) || 0), 0
+                    );
+
+                    document.getElementById('itemCount').textContent =
+                        booksInCart.length;
+
+                    document.getElementById('subtotal').textContent =
+                        total.toLocaleString('en-IN');
+
+                    document.getElementById('grandTotal').textContent =
+                        total.toLocaleString('en-IN');
+                }
+
+                function escapeHTML(value) {
+                    return String(value ?? '').replace(/[&<>"']/g, char => ({
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#39;'
+                    })[char]);
+                }
+
+                function removeBook(id) {
+                    booksInCart = booksInCart.filter(
+                        book => String(book._id) !== String(id)
+                    );
+
+                    saveCartIds(booksInCart.map(book => book._id));
+
+                    renderCart();
+
+                    // Update navbar cart count if available
+                    const cartCount = document.getElementById('cartCount');
+
+                    if (cartCount) {
+                        cartCount.textContent = booksInCart.length;
+                    }
+                }
+
+                function showEmptyCart() {
+                    document.getElementById('cartItems').innerHTML = `
+                <div class="bg-white rounded-2xl border border-amber-100 p-10 text-center shadow-sm">
+
+                    <div class="text-6xl mb-4">🛒</div>
+
+                    <h2 class="text-2xl font-bold text-stone-900">
+                        Your cart is empty!
+                    </h2>
+
+                    <p class="text-stone-500 mt-2">
+                        Looks like you haven't added any books yet.
+                    </p>
+
+                    <a href="/books"
+                       class="inline-block mt-6 bg-amber-700 hover:bg-stone-900 text-white px-6 py-3 rounded-xl font-semibold transition duration-300">
+                        Browse Books
+                    </a>
+
+                </div>`;
+
+                    document.getElementById('itemCount').textContent = '0';
+                    document.getElementById('subtotal').textContent = '0';
+                    document.getElementById('grandTotal').textContent = '0';
+                }
+
+                function checkout() {
+                    if (booksInCart.length === 0) {
+                        alert('Your cart is empty!');
+                        return;
+                    }
+
+                    alert('Your cart is ready! Checkout and payment functionality still needs to be connected.');
+                }
+
+                loadCart();
+            </script>
+
+</body>
+
+</html>

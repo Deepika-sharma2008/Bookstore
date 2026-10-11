@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Books | Read Me</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-amber-50 text-stone-800 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <%- include('includes/nav.ejs') %>
+
+        <!-- Header -->
+        <section class="bg-stone-900 text-white">
+            <div class="max-w-7xl mx-auto px-6 py-12">
+
+                <div class="flex flex-wrap justify-between items-center gap-5">
+
+                    <div>
+                        <p class="text-amber-400 font-semibold mb-2">
+                            READ • LEARN • GROW
+                        </p>
+
+                        <h1 class="text-3xl md:text-4xl font-bold">
+                            Our <span class="text-amber-400">Books</span>
+                        </h1>
+
+                        <p class="text-stone-300 mt-3">
+                            Find your next favourite book and explore new ideas.
+                        </p>
+                    </div>
+
+                    <!-- Admin Buttons -->
+                    <% if (isAdmin) { %>
+                        <div class="flex flex-wrap gap-3">
+
+                            <a href="/books/new" class="bg-amber-700 text-white px-5 py-3
+                                  rounded-lg font-semibold hover:bg-amber-600">
+                                + Add New Book
+                            </a>
+
+                            <a href="/admin/logout" onclick="return confirm('Are you sure you want to logout?')" class="border border-stone-500 px-5 py-3
+                                  rounded-lg hover:bg-stone-800">
+                                Logout
+                            </a>
+
+                        </div>
+                        <% } %>
+
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Books Grid -->
+        <div class="max-w-7xl mx-auto w-full px-6 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
+
+                <% books.forEach(book=> { %>
+
+                    <!-- Book Card -->
+                    <div
+                        class="flex flex-col sm:flex-row bg-white rounded-2xl overflow-hidden border border-amber-100 shadow-md hover:shadow-xl transition">
+
+                        <!-- Left Side: Book Image -->
+                        <div class="w-full sm:w-2/5 h-56 sm:h-auto sm:min-h-[300px] flex-shrink-0 overflow-hidden">
+                            <img src="<%= book.image %>" alt="<%= book.title %>"
+                                class="w-full h-full object-cover object-center block">
+                        </div>
+
+                        <!-- Right Side: Book Details -->
+                        <div class="flex-1 min-w-0 p-5 flex flex-col justify-center">
+
+                            <span
+                                class="self-start bg-amber-100 text-amber-900 px-3 py-1 rounded-full text-xs font-semibold mb-3">
+                                <%= book.category || 'General' %>
+                            </span>
+
+                            <h2 class="text-xl font-bold text-stone-900 mb-2">
+                                <%= book.title %>
+                            </h2>
+
+                            <p class="text-stone-500 text-sm mb-3">
+                                By <%= book.authorName %>
+                            </p>
+
+                            <p class="text-stone-600 text-sm leading-6 mb-4">
+                                <%= book.description %>
+                            </p>
+
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="text-stone-500 text-sm">Price</span>
+                                <span class="text-xl font-bold text-amber-800">
+                                    ₹<%= book.price %>
+                                </span>
+                            </div>
+
+                            <!-- Cart & Buy Buttons -->
+                            <div class="flex flex-col gap-2">
+                                <button type="button" onclick="addToCart('<%= book._id %>')"
+                                    class="w-full bg-amber-100 text-amber-900 border border-amber-800 rounded-lg font-semibold px-3 py-3 hover:bg-amber-200 transition">
+                                    🛒 Add to Cart
+                                </button>
+
+                                <button type="button" onclick="buyNow('<%= book._id %>')"
+                                    class="w-full bg-stone-900 text-white rounded-lg font-semibold px-3 py-3 hover:bg-stone-700 transition">
+                                    Buy Now →
+                                </button>
+                            </div>
+
+                            <!-- Admin Actions -->
+                            <% if (typeof isAdmin !=='undefined' && isAdmin) { %>
+                                <div class="flex gap-2 mt-3 pt-3 border-t border-stone-100">
+                                    <a href="/books/edit/<%= book._id %>"
+                                        class="flex-1 text-center bg-blue-50 text-blue-700 py-2 rounded-lg hover:bg-blue-100">
+                                        Edit
+                                    </a>
+
+                                    <form action="/books/delete/<%= book._id %>" method="POST" class="flex-1"
+                                        onsubmit="return confirm('Delete this book?')">
+                                        <button type="submit"
+                                            class="w-full bg-red-50 text-red-600 py-2 rounded-lg hover:bg-red-100">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                                <% } %>
+
+                        </div>
+                    </div>
+
+                    <% }) %>
+
+            </div>
+        </div>
+
+
+
+        <!-- Footer -->
+        <%- include('includes/footer.ejs') %>
+
+
+            <!-- Cart Script -->
+            <script>
+                function getCart() {
+                    return JSON.parse(localStorage.getItem('bookCart')) || [];
+                }
+
+                function updateCartCount() {
+                    const count = document.getElementById('cartCount');
+
+                    if (count) {
+                        count.textContent = getCart().length;
+                    }
+                }
+
+                function addToCart(bookId) {
+                    let cart = getCart();
+
+                    if (cart.includes(bookId)) {
+                        alert('This book is already in your cart!');
+                        return;
+                    }
+
+                    cart.push(bookId);
+                    localStorage.setItem('bookCart', JSON.stringify(cart));
+
+                    updateCartCount();
+                    alert('Book added to cart successfully!');
+                }
+
+                function buyNow(bookId) {
+                    const cart = getCart();
+
+                    if (!cart.includes(bookId)) {
+                        cart.push(bookId);
+                        localStorage.setItem('bookCart', JSON.stringify(cart));
+                    }
+
+                    window.location.href = '/cart';
+                }
+
+                document.addEventListener('DOMContentLoaded', updateCartCount);
+            </script>
+
+</body>
+
+</html>

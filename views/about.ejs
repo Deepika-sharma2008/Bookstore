@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookora</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-amber-50 text-stone-800 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <%- include('includes/nav.ejs') %>
+
+    <!-- Hero Section -->
+    <section class="bg-stone-900 text-white">
+        <div class="max-w-7xl mx-auto px-6 py-20 text-center">
+
+            <p class="uppercase tracking-[0.25em] text-amber-400 font-semibold">
+                ABOUT Bookora
+            </p>
+
+            <h1 class="text-4xl md:text-5xl font-bold mt-4">
+                A Place Made for
+                <span class="text-amber-400">Book Lovers</span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto mt-6 text-stone-300 text-lg leading-8">
+                Discover stories, gain knowledge and find books that inspire
+                you to learn, grow and imagine something new.
+            </p>
+
+            <a href="/books"
+               class="inline-block mt-8 bg-amber-600 text-white px-7 py-3
+                      rounded-xl font-semibold hover:bg-amber-500 transition">
+                Explore Our Books →
+            </a>
+
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="max-w-7xl mx-auto w-full px-6 py-16">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+            <!-- Our Story -->
+            <div>
+                <span class="text-amber-800 font-bold tracking-widest text-sm">
+                    OUR STORY
+                </span>
+
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 text-stone-900">
+                    More Than Just a Bookstore
+                </h2>
+
+                <p class="text-stone-600 mt-6 leading-8">
+                    Bookora is an online bookstore created for people who
+                    love reading, exploring new ideas and discovering
+                    knowledge through books.
+                </p>
+
+                <p class="text-stone-600 mt-4 leading-8">
+                    From fantasy and fiction to self-learning and personal
+                    development, our collection brings different kinds of
+                    books together in one convenient place.
+                </p>
+
+                <p class="text-stone-600 mt-4 leading-8">
+                    Our goal is to make discovering and exploring books
+                    simple, enjoyable and accessible for every reader.
+                </p>
+
+                <a href="/books"
+                   class="inline-block mt-7 bg-stone-900 text-white px-7 py-3
+                          rounded-xl font-semibold hover:bg-amber-700 transition">
+                    Discover Your Next Read →
+                </a>
+            </div>
+
+            <!-- Visual Card -->
+            <div class="bg-amber-100 border border-amber-200 rounded-3xl p-6 md:p-10">
+
+                <div class="bg-white rounded-2xl shadow-sm border border-amber-100
+                            p-8 md:p-12 text-center">
+
+                    <div class="text-7xl mb-6">📚</div>
+
+                    <p class="text-amber-800 font-semibold tracking-widest text-sm">
+                        OUR PHILOSOPHY
+                    </p>
+
+                    <h3 class="text-3xl font-bold text-stone-900 mt-3">
+                        Read. Learn. Grow.
+                    </h3>
+
+                    <p class="text-stone-500 mt-5 leading-7">
+                        Every book offers an opportunity to learn something
+                        new, explore another world and see life differently.
+                    </p>
+
+                    <div class="flex justify-center gap-3 mt-7">
+                        <span class="bg-amber-100 text-amber-900 px-4 py-2
+                                     rounded-full text-sm font-medium">
+                            Read
+                        </span>
+                        <span class="bg-stone-900 text-white px-4 py-2
+                                     rounded-full text-sm font-medium">
+                            Grow
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Our Values -->
+    <section class="bg-white border-y border-amber-100 py-16">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="text-center mb-12">
+                <p class="text-amber-800 font-semibold tracking-widest text-sm">
+                    WHAT MATTERS TO US
+                </p>
+
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mt-3">
+                    What We Believe
+                </h2>
+
+                <p class="text-stone-500 mt-4 max-w-xl mx-auto">
+                    Books can change the way we think, learn and see the world.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+
+                <!-- Value 1 -->
+                <div class="text-center p-8 rounded-2xl bg-amber-50
+                            border border-amber-100 hover:shadow-lg transition">
+
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-100
+                                flex items-center justify-center text-3xl">
+                        📖
+                    </div>
+
+                    <h3 class="text-xl font-bold text-stone-900 mt-5">
+                        Love for Reading
+                    </h3>
+
+                    <p class="text-stone-600 mt-3 leading-7">
+                        Every reader deserves to discover a book that
+                        captures their imagination and interests.
+                    </p>
+                </div>
+
+                <!-- Value 2 -->
+                <div class="text-center p-8 rounded-2xl bg-amber-50
+                            border border-amber-100 hover:shadow-lg transition">
+
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-100
+                                flex items-center justify-center text-3xl">
+                        💡
+                    </div>
+
+                    <h3 class="text-xl font-bold text-stone-900 mt-5">
+                        Continuous Learning
+                    </h3>
+
+                    <p class="text-stone-600 mt-3 leading-7">
+                        Reading introduces us to new skills, useful ideas
+                        and different perspectives.
+                    </p>
+                </div>
+
+                <!-- Value 3 -->
+                <div class="text-center p-8 rounded-2xl bg-amber-50
+                            border border-amber-100 hover:shadow-lg transition">
+
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-100
+                                flex items-center justify-center text-3xl">
+                        🌱
+                    </div>
+
+                    <h3 class="text-xl font-bold text-stone-900 mt-5">
+                        Personal Growth
+                    </h3>
+
+                    <p class="text-stone-600 mt-3 leading-7">
+                        The right book can inspire us to develop new habits
+                        and become better versions of ourselves.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Reading Inspiration Section -->
+<section class="max-w-6xl mx-auto px-6 py-16">
+
+    <div class="bg-stone-900 text-white rounded-2xl p-8 md:p-12
+                flex flex-col md:flex-row items-center
+                justify-between gap-8">
+
+        <div class="max-w-2xl">
+            <p class="text-amber-300 font-semibold mb-3">
+                A LITTLE INSPIRATION
+            </p>
+
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Every Book Opens a New Door
+            </h2>
+
+            <p class="text-stone-300 leading-7">
+                Take a break from your routine, discover new ideas
+                and let every page bring you something meaningful.
+                Your next great read is waiting for you.
+            </p>
+        </div>
+
+        <div class="text-center shrink-0">
+            <!-- <div class="text-6xl mb-4"></div> -->
+
+            <a href="/books"
+               class="inline-block bg-amber-700 text-white
+                      px-6 py-3 rounded-lg
+                      hover:bg-amber-600 transition">
+                Start Reading →
+            </a>
+        </div>
+
+    </div>
+</section>
+
+    <!-- Footer -->
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>

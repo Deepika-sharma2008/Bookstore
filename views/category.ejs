@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookora</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-amber-50 text-stone-800 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <%- include('includes/nav.ejs') %>
+
+    <!-- Header -->
+    <section class="bg-stone-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 py-16 md:py-20 text-center">
+
+            <p class="text-amber-400 font-semibold tracking-[0.25em] mb-3">
+                READ • LEARN • GROW
+            </p>
+
+            <h1 class="text-4xl md:text-5xl font-bold">
+                Explore Our <span class="text-amber-400">Categories</span>
+            </h1>
+
+            <p class="mt-5 text-stone-300 text-base md:text-lg max-w-2xl mx-auto">
+                Every book opens a new door. Discover your next favourite
+                read from our carefully selected collection.
+            </p>
+
+            <a href="/books"
+               class="inline-block mt-7 bg-amber-600 text-white px-7 py-3 rounded-xl
+                      font-semibold hover:bg-amber-500 transition duration-300">
+                Explore All Books →
+            </a>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="max-w-7xl mx-auto w-full px-6 py-12">
+
+        <div class="text-center mb-8">
+            <p class="text-amber-800 font-semibold mb-2">FIND YOUR INTEREST</p>
+            <h2 class="text-3xl font-bold text-stone-900">
+                Browse by Category
+            </h2>
+            <p class="text-stone-500 mt-3">
+                Choose a category and find books that match your interests.
+            </p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3">
+
+            <a href="/category"
+               class="px-5 py-3 rounded-full bg-stone-900 text-white font-semibold
+                      hover:bg-stone-700 transition">
+                📚 All Books
+            </a>
+
+            <a href="/category/Fantasy"
+               class="px-5 py-3 rounded-full bg-white border border-amber-300
+                      text-amber-900 font-semibold hover:bg-amber-100 transition">
+                🧙 Fantasy
+            </a>
+
+            <a href="/category/SelfLearning"
+               class="px-5 py-3 rounded-full bg-white border border-amber-300
+                      text-amber-900 font-semibold hover:bg-amber-100 transition">
+                🌱 Self Learning
+            </a>
+
+            <a href="/category/Fiction"
+               class="px-5 py-3 rounded-full bg-white border border-amber-300
+                      text-amber-900 font-semibold hover:bg-amber-100 transition">
+                📖 Fiction
+            </a>
+
+            <a href="/category/Mystery"
+               class="px-5 py-3 rounded-full bg-white border border-amber-300
+                      text-amber-900 font-semibold hover:bg-amber-100 transition">
+                🔎 Mystery
+            </a>
+
+            <a href="/category/ScienceTechnology"
+               class="px-5 py-3 rounded-full bg-white border border-amber-300
+                      text-amber-900 font-semibold hover:bg-amber-100 transition">
+                🔬 Science & Technology
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section class="max-w-7xl mx-auto w-full px-6 pb-16">
+
+        <div class="flex flex-wrap justify-between items-center gap-3 mb-8">
+            <div>
+                <p class="text-amber-800 font-semibold text-sm">YOUR NEXT READ</p>
+                <h2 class="text-3xl font-bold text-stone-900 mt-1">
+                    Our Book Collection
+                </h2>
+            </div>
+
+            <span class="bg-amber-100 text-amber-900 px-4 py-2 rounded-full text-sm font-semibold">
+                <%= books.length %> Books
+            </span>
+        </div>
+
+        <% if (books.length === 0) { %>
+
+            <div class="bg-white rounded-2xl border border-amber-100
+                        p-10 text-center shadow-sm">
+                <div class="text-5xl mb-4">📚</div>
+                <h3 class="text-2xl font-bold text-stone-900">
+                    No Books Found
+                </h3>
+                <p class="text-stone-500 mt-3">
+                    No books are available in this category yet.
+                </p>
+                <a href="/category"
+                   class="inline-block mt-6 bg-amber-700 text-white px-6 py-3
+                          rounded-xl font-semibold hover:bg-amber-600 transition">
+                    View All Books
+                </a>
+            </div>
+
+        <% } else { %>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+
+                <% books.forEach(book => { %>
+
+                    <!-- Book Card -->
+                    <div class="bg-white rounded-2xl overflow-hidden
+                                border border-amber-100 shadow-sm
+                                hover:shadow-xl hover:-translate-y-1
+                                transition duration-300">
+
+                        <!-- Book Image -->
+                        <div class="h-64 bg-amber-50 overflow-hidden">
+                            <% if (book.image) { %>
+                                <img
+                                    src="<%= book.image %>"
+                                    alt="<%= book.title %>"
+                                    class="w-full h-full object-contain p-3
+                                           hover:scale-105 transition duration-500"
+                                >
+                            <% } else { %>
+                                <div class="h-full flex flex-col items-center
+                                            justify-center text-amber-800">
+                                    <span class="text-5xl">📚</span>
+                                    <p class="mt-3 text-sm">No Image Available</p>
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <!-- Book Details -->
+                        <div class="p-5">
+
+                            <span class="inline-block bg-amber-100 text-amber-900
+                                         text-xs font-semibold px-3 py-1
+                                         rounded-full mb-3">
+                                <%= book.category || 'General' %>
+                            </span>
+
+                            <h3 class="text-xl font-bold text-stone-900
+                                       truncate">
+                                <%= book.title %>
+                            </h3>
+
+                            <p class="text-stone-500 text-sm mt-2">
+                                By <%= book.authorName %>
+                            </p>
+
+                            <p class="text-stone-600 text-sm leading-6 mt-3">
+                                <%= book.description || 'Discover this book and explore something new.' %>
+                            </p>
+
+                            <div class="flex items-center justify-between gap-3
+                                        mt-5 pt-4 border-t border-amber-100">
+
+                                <div>
+                                    <p class="text-stone-500 text-xs">PRICE</p>
+                                    <p class="text-2xl font-bold text-amber-800">
+                                        ₹<%= book.price %>
+                                    </p>
+                                </div>
+
+                                <a href="/books/<%= book._id %>/edit"
+                                   class="bg-amber-100 text-amber-900
+                                          border border-amber-700 px-4 py-2
+                                          rounded-lg font-semibold
+                                          hover:bg-amber-700 hover:text-white
+                                          transition">
+                                    ✏️ Edit
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        <% } %>
+    </section>
+
+    <!-- Footer -->
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>

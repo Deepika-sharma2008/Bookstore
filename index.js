@@ -10,10 +10,11 @@ const multer = require('multer')
 const nodemailer = require('nodemailer')
 const session = require('express-session')
 
+require('dotenv').config();
 
 async function main() {
     // await mongoose.connect('mongodb://127.0.0.1:27017/bookstore')
-    await mongoose.connect('mongodb+srv://deepika9950sharma_db_user:KRBanPi4UjJqKWp0@cluster0.egs2hkf.mongodb.net/?appName=Cluster0')
+    await mongoose.connect(process.env.MONGODB_URI)
 }
 
 main()
@@ -73,7 +74,7 @@ app.use(express.json());
 
 
 app.use(session({
-    secret: 'bookstoresecert',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }));

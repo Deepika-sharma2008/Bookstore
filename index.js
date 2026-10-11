@@ -3,7 +3,7 @@ const ADMIN_PASSWORD = "1234"
 
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.port || 3000;
 
 const mongoose = require('mongoose');
 const multer = require('multer')
@@ -12,7 +12,8 @@ const session = require('express-session')
 
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/bookstore')
+    // await mongoose.connect('mongodb://127.0.0.1:27017/bookstore')
+    await mongoose.connect('mongodb+srv://deepika9950sharma_db_user:KRBanPi4UjJqKWp0@cluster0.egs2hkf.mongodb.net/?appName=Cluster0')
 }
 
 main()
